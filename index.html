@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>재정지원사업 사후관리 일정</title>
+<style>
+:root{color-scheme:light;--bg:#f5f6f8;--card:#fff;--tx:#1b1f27;--mu:#6b7280;--bd:#e3e6ec;--ac:#2b5fd9;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12151b;--card:#1c2029;--tx:#eceff4;--mu:#9aa3b2;--bd:#2d3340;--ac:#6b93f5}}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Pretendard","Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:14px}
+header{padding:18px 20px 8px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+h1{font-size:20px;margin:0}h1 small{display:block;font-size:12px;color:var(--mu);font-weight:400;margin-top:3px}
+.ctl{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:12px;color:var(--mu)}
+button,input{font:inherit;color:var(--tx)}
+button{background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:6px 12px;cursor:pointer}
+button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+input[type=date]{background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:5px 8px}
+main{padding:8px 20px 28px;display:grid;gap:16px;grid-template-columns:minmax(0,1fr) 320px}
+@media(max-width:900px){main{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px}
+.tabs{display:flex;gap:6px;margin-bottom:10px}
+.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:8px;overflow:hidden}
+.dow{background:var(--card);text-align:center;padding:6px 0;font-size:12px;color:var(--mu)}
+.cell{background:var(--card);min-height:92px;padding:4px;cursor:pointer;overflow:hidden}
+.cell.out{background:var(--bg);cursor:default}.cell.sel{outline:2px solid var(--ac);outline-offset:-2px}
+.cell .n{font-size:12px;color:var(--mu)}.cell.sun .n{color:#e5484d}.cell.base .n{color:var(--ac);font-weight:700}
+.chip{display:block;margin-top:3px;padding:2px 5px;border-radius:4px;font-size:11px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip.imp{font-weight:800}.chip.cont{opacity:.65}
+@media(max-width:600px){.cell{min-height:64px}.chip{font-size:9px;padding:1px 3px}}
+#det h3{margin:0 0 4px;font-size:16px}.tag{display:inline-block;font-size:11px;padding:1px 8px;border-radius:99px;background:var(--bg);border:1px solid var(--bd);color:var(--mu)}
+.row{margin:10px 0;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.it{padding:8px;border:1px solid var(--bd);border-radius:8px;margin-bottom:8px;cursor:pointer;border-left-width:5px}
+.mu{color:var(--mu)}
+.gwrap{overflow-x:auto;border:1px solid var(--bd);border-radius:8px}
+.g{position:relative;min-width:max-content}
+.gr{display:flex;height:30px;border-bottom:1px solid var(--bd)}
+.gl{position:sticky;left:0;z-index:2;width:190px;flex:none;background:var(--card);padding:6px 8px;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-right:1px solid var(--bd)}
+.gt{position:relative;flex:none}
+.bar{position:absolute;top:5px;height:20px;border-radius:5px;color:#fff;font-size:11px;padding:0 6px;line-height:20px;white-space:nowrap;overflow:hidden;cursor:pointer}
+.bar.imp{font-weight:800}
+.tk{position:absolute;top:0;bottom:0;border-left:1px dashed var(--bd);font-size:10px;color:var(--mu);padding-left:2px}
+.bl{position:absolute;top:0;bottom:0;border-left:2px solid var(--ac);z-index:1}
+#pop,#fm{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:50;padding:16px}
+#pop .box,#fm .box{background:var(--card);border-radius:14px;max-width:420px;width:100%;padding:20px;border-top:6px solid #e5484d;max-height:80vh;overflow:auto}
+#pop h2{margin:0 0 10px;font-size:17px;color:#e5484d}#fm .box{border-top-color:var(--ac)}#fm h2{margin:0 0 10px;font-size:17px}#fm label{display:block;margin:8px 0;font-size:12px;color:var(--mu)}#fm input,#fm select,#fm textarea{display:block;width:100%;margin-top:3px;background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:7px 8px;font:inherit;color:var(--tx)}#fm input[type=checkbox]{display:inline-block;width:auto;margin:0 4px 0 0}#fm input[type=color]{width:60px;height:34px;padding:2px}
+</style></head><body>
+<header>
+<h1>재정지원사업 사후관리 일정<small>2026년 11월 ~ 12월 · 데모 버전</small></h1>
+<div class="ctl"><button class="on" id="add">+ 일정 추가</button>기준일<input type="date" id="base"><button id="chk">1주일 전 경고 확인</button></div>
+</header>
+<main>
+<section class="card">
+<div class="tabs"><button id="t11">11월</button><button id="t12">12월</button></div>
+<div id="cal"></div>
+</section>
+<aside class="card" id="det"></aside>
+<section class="card" style="grid-column:1/-1">
+<b>타임차트</b> <span class="mu">(막대를 누르면 상세 확인 · 파란 세로선은 기준일)</span>
+<div class="gwrap" style="margin-top:10px"><div class="g" id="gantt"></div></div>
+</section>
+</main>
+<div id="fm"><div class="box"><h2 id="fh">일정 추가</h2>
+<label>일정명<input id="f_t" maxlength="60" placeholder="예: 실적보고서 제출 마감"></label>
+<div style="display:flex;gap:8px"><label style="flex:1">시작일<input type="date" id="f_s" min="2026-11-01" max="2026-12-31"></label><label style="flex:1">종료일(선택)<input type="date" id="f_e" min="2026-11-01" max="2026-12-31"></label></div>
+<label>구분<select id="f_c"><option>제출</option><option>정산</option><option>점검</option><option>기타</option></select></label>
+<label>세부내용<textarea id="f_d" rows="4" placeholder="주요 체크사항을 입력하세요"></textarea></label>
+<div class="row"><label style="margin:0"><input type="checkbox" id="f_i">중요 일정(굵게)</label><label style="margin:0">색상<input type="color" id="f_k" value="#3b82f6"></label></div>
+<div class="row" style="justify-content:flex-end"><button id="fc">취소</button><button class="on" id="fs">저장</button></div></div></div>
+<div id="pop"><div class="box"><h2>⚠ 일정 1주일 전 경고</h2><div id="pl"></div><div class="row" style="justify-content:flex-end"><button id="px">확인</button></div></div></div>
+<script>
+let E=[];
+let ov={},sel=null,mon=11,selDay=null;
+try{ov=JSON.parse(localStorage.getItem('fs_ov')||'{}')}catch(e){}
+try{E=JSON.parse(localStorage.getItem('fs_ev')||'[]')}catch(e){E=[]}
+const svE=()=>{try{localStorage.setItem('fs_ev',JSON.stringify(E))}catch(e){}};
+const sv=()=>{try{localStorage.setItem('fs_ov',JSON.stringify(ov))}catch(e){}};
+const $=i=>document.getElementById(i);
+const D=s=>{const[a,b,c]=s.split('-');return new Date(+a,b-1,+c)};
+const F=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const dd=(a,b)=>Math.round((D(b)-D(a))/864e5);
+const imp=e=>ov[e.id]&&ov[e.id].imp!==undefined?ov[e.id].imp:e.imp;
+const col=e=>(ov[e.id]&&ov[e.id].color)||e.color||(imp(e)?'#e5484d':'#3b82f6');
+const base=()=>$('base').value;
+$('base').value=F(new Date());
+function dl(e){const n=dd(base(),e.s);return n>0?'D-'+n:n==0?'D-Day':'D+'+(-n)}
+function cal(){
+ const y=2026,first=new Date(y,mon-1,1),last=new Date(y,mon,0).getDate();
+ let h='<div class="grid">'+'일월화수목금토'.split('').map(x=>`<div class="dow">${x}</div>`).join('');
+ for(let i=0;i<first.getDay();i++)h+='<div class="cell out"></div>';
+ for(let d=1;d<=last;d++){
+  const k=F(new Date(y,mon-1,d)),dow=new Date(y,mon-1,d).getDay();
+  const ev=E.filter(e=>k>=e.s&&k<=e.e);
+  h+=`<div class="cell ${dow==0?'sun':''} ${k==base()?'base':''} ${k==selDay?'sel':''}" data-d="${k}"><span class="n">${d}</span>`+
+  ev.map(e=>`<span class="chip ${imp(e)?'imp':''} ${k>e.s?'cont':''}" style="background:${col(e)}" data-id="${e.id}">${imp(e)?'★ ':''}${e.t}</span>`).join('')+'</div>';
+ }
+ $('cal').innerHTML=h+'</div>';
+ $('t11').className=mon==11?'on':'';$('t12').className=mon==12?'on':'';
+}
+function det(){
+ const e=E.find(x=>x.id==sel);
+ if(!e){$('det').innerHTML='<p class="mu">'+(E.length?'달력이나 타임차트에서 일정을 선택하세요.':'등록된 일정이 없습니다. 상단의 <b>+ 일정 추가</b> 버튼으로 일정을 입력하세요.')+'</p>';return}
+ let list='';
+ if(selDay){const ev=E.filter(x=>selDay>=x.s&&selDay<=x.e);
+  list=`<div style="margin-bottom:12px"><b>${selDay} 일정</b><div style="margin-top:6px">`+(ev.length?ev.map(x=>`<div class="it" style="border-left-color:${col(x)}" data-id="${x.id}">${imp(x)?'<b>★ '+x.t+'</b>':x.t}</div>`).join(''):'<span class="mu">등록된 일정이 없습니다.</span>')+'</div></div>'}
+ $('det').innerHTML=list+`<h3 style="${imp(e)?'font-weight:800;color:'+col(e):''}">${imp(e)?'★ ':''}${e.t}</h3>
+ <span class="tag">${e.c}</span> <span class="tag">${dl(e)}</span>
+ <p class="mu" style="margin:10px 0 4px">${e.s==e.e?e.s:e.s+' ~ '+e.e}</p>
+ <p style="line-height:1.6;margin:6px 0">${e.d}</p>
+ <div class="row"><label><input type="checkbox" id="ci" ${imp(e)?'checked':''}> 중요 일정(굵게)</label></div>
+ <div class="row"><label>표시 색상 <input type="color" id="cc" value="${col(e)}"></label></div>
+ <div class="row"><button id="ed">수정</button><button id="dl">삭제</button></div>`;
+ $('ed').onclick=()=>openF(e.id);
+ $('dl').onclick=()=>{if(confirm('이 일정을 삭제할까요?')){E=E.filter(x=>x.id!=e.id);delete ov[e.id];sv();svE();sel=null;all()}};
+ $('ci').onchange=x=>{ov[e.id]=Object.assign(ov[e.id]||{},{imp:x.target.checked?1:0});if(!ov[e.id].colorSet)delete ov[e.id].color;sv();all()};
+ $('cc').onchange=x=>{ov[e.id]=Object.assign(ov[e.id]||{},{color:x.target.value,colorSet:1});sv();all()};
+}
+function gantt(){
+ const W=22,N=61,s0='2026-11-01',lw=190;
+ let h=`<div class="gr"><div class="gl"><b>일정</b></div><div class="gt" style="width:${N*W}px">`;
+ for(let i=0;i<N;i+=1){const d=new Date(2026,10,1+i);if(d.getDate()==1||d.getDate()%5==0&&d.getDate()<31)h+=`<div class="tk" style="left:${i*W}px">${d.getDate()==1?(d.getMonth()+1)+'/1':d.getDate()}</div>`}
+ h+='</div></div>';
+ E.forEach(e=>{
+  const l=dd(s0,e.s)*W,w=(dd(e.s,e.e)+1)*W;
+  h+=`<div class="gr"><div class="gl" style="${imp(e)?'font-weight:800':''}">${imp(e)?'★ ':''}${e.t}</div><div class="gt" style="width:${N*W}px"><div class="bar ${imp(e)?'imp':''}" data-id="${e.id}" style="left:${l}px;width:${w}px;background:${col(e)}">${w>70?e.s.slice(5):''}</div></div></div>`;
+ });
+ if(!E.length)h+='<div class="gr"><div class="gl mu">등록된 일정이 없습니다</div></div>';
+ const b=dd(s0,base());
+ if(b>=0&&b<N)h+=`<div class="bl" style="left:${lw+b*W+W/2}px"></div>`;
+ $('gantt').innerHTML=h;
+}
+function warn(){
+ const hits=E.filter(e=>{const n=dd(base(),e.s);return n>=0&&n<=7}).sort((a,b)=>a.s<b.s?-1:1);
+ if(!hits.length)return false;
+ $('pl').innerHTML=hits.map(e=>`<div class="it" style="border-left-color:${col(e)}"><span style="${imp(e)?'font-weight:800':''}">${imp(e)?'★ ':''}${e.t}</span><br><span class="mu">${e.s} · ${dl(e)}</span></div>`).join('');
+ $('pop').style.display='flex';return true;
+}
+function all(){cal();det();gantt()}
+document.addEventListener('click',ev=>{
+ const c=ev.target.closest('[data-id]');
+ if(c&&!ev.target.closest('#pop')){sel=+c.dataset.id;const cell=c.closest('.cell');selDay=cell?cell.dataset.d:selDay;all();return}
+ const cell=ev.target.closest('.cell[data-d]');
+ if(cell){selDay=cell.dataset.d;const f=E.find(e=>selDay>=e.s&&selDay<=e.e);if(f)sel=f.id;all()}
+});
+$('t11').onclick=()=>{mon=11;cal()};$('t12').onclick=()=>{mon=12;cal()};
+$('px').onclick=()=>$('pop').style.display='none';
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/\n/g,'<br>');
+const un=s=>s.replace(/<br>/g,'\n').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&amp;/g,'&');
+let editId=null,cm=0;
+function openF(id){editId=id||null;const e=id?E.find(x=>x.id==id):null;
+ $('fh').textContent=e?'일정 수정':'일정 추가';
+ $('f_t').value=e?un(e.t):'';$('f_s').value=e?e.s:(selDay||'2026-11-01');$('f_e').value=e&&e.e!=e.s?e.e:'';
+ $('f_c').value=e?e.c:'제출';$('f_d').value=e?un(e.d):'';$('f_i').checked=e?!!imp(e):false;$('f_k').value=e?col(e):'#3b82f6';cm=e?1:0;
+ $('fm').style.display='flex'}
+$('f_i').onchange=()=>{if(!cm)$('f_k').value=$('f_i').checked?'#e5484d':'#3b82f6'};
+$('f_k').oninput=()=>{cm=1};
+$('add').onclick=()=>openF();
+$('fc').onclick=()=>{$('fm').style.display='none'};
+$('fs').onclick=()=>{const t=$('f_t').value.trim(),s=$('f_s').value;let en=$('f_e').value||s;
+ if(!t||!s){alert('일정명과 시작일을 입력하세요.');return}
+ if(s<'2026-11-01'||s>'2026-12-31'||en>'2026-12-31'){alert('2026년 11월 1일 ~ 12월 31일 범위에서 입력하세요.');return}
+ if(en<s)en=s;
+ const o={t:esc(t),s,e:en,c:$('f_c').value,d:esc($('f_d').value.trim()),imp:$('f_i').checked?1:0,color:$('f_k').value};
+ if(editId){const i=E.findIndex(x=>x.id==editId);o.id=editId;E[i]=o;delete ov[editId];sv()}else{o.id=Date.now();E.push(o)}
+ sel=o.id;selDay=s;mon=+s.slice(5,7);svE();$('fm').style.display='none';all()};
+$('base').onchange=()=>{all();warn()};
+$('chk').onclick=()=>{if(!warn())alert('기준일 기준 1주일 이내 예정된 일정이 없습니다.')};
+all();warn();
+</script></body></html>
